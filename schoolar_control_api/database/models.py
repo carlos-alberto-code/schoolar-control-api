@@ -10,7 +10,7 @@ class Base(DeclarativeBase):
 class Role(Base):
     __tablename__ = 'roles'
     __table_args__ = (
-        CheckConstraint('LENGTH(name) > 3', name='check_role_name_length')
+        CheckConstraint('LENGTH(name) > 3', name='check_role_name_length'),
     )
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
@@ -27,7 +27,7 @@ class User(Base):
     __table_args__ = (
         CheckConstraint('LENGTH(username) > 3', name='check_username_length'),
         CheckConstraint('LENGTH(password) > 6', name='check_password_length'),
-        CheckConstraint(r"email ~* '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'", name='check_email_format')
+        CheckConstraint(r"email REGEXP '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'", name='check_email_format'),
     )
 
 
