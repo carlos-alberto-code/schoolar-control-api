@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "schoolar-control-api"
+version = "0.1.0"
+description = ""
+authors = ["Carlos Baltazar <A840159943@my.uvm.edu.mx>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
