@@ -18,10 +18,14 @@ from sqlalchemy import (
 
 
 class Base(DeclarativeBase):
+    """Clase base para todos los modelos."""
+
     pass
 
 
 class Role(Base):
+    """Modelo que representa un rol en el sistema."""
+
     __tablename__ = "roles"
     __table_args__ = (
         CheckConstraint("LENGTH(name) > 3", name="check_role_name_length"),
@@ -39,6 +43,8 @@ class Role(Base):
 
 
 class User(Base):
+    """Modelo que representa un usuario en el sistema."""
+
     __tablename__ = "users"
     __table_args__ = (
         CheckConstraint("LENGTH(username) > 3", name="check_username_length"),
@@ -72,6 +78,8 @@ roles_users = Table(
 
 
 class Degree(Base):
+    """Modelo que representa un grado académico en el sistema."""
+
     __tablename__ = "degrees"
     __table_args__ = (
         CheckConstraint("LENGTH(name) > 3", name="check_degree_name_length"),
@@ -98,6 +106,8 @@ class Degree(Base):
 
 
 class AcademicPeriod(Base):
+    """Modelo que representa un periodo académico en el sistema."""
+
     __tablename__ = "academic_periods"
     __table_args__ = (
         CheckConstraint("end_date >= start_date", name="check_period_dates"),
@@ -126,6 +136,8 @@ class AcademicPeriod(Base):
 
 
 class Teacher(Base):
+    """Modelo que representa un profesor en el sistema."""
+
     __tablename__ = "teachers"
     __table_args__ = (
         CheckConstraint(
@@ -154,6 +166,8 @@ class Teacher(Base):
 
 
 class Student(Base):
+    """Modelo que representa un estudiante en el sistema."""
+
     __tablename__ = "students"
     __table_args__ = (
         CheckConstraint("LENGTH(key_registration) >= 5", name="check_key_registration"),
@@ -190,6 +204,8 @@ class Student(Base):
 
 
 class Course(Base):
+    """Modelo que representa un curso en el sistema."""
+
     __tablename__ = "courses"
     __table_args__ = (
         CheckConstraint(
@@ -236,6 +252,8 @@ class Course(Base):
 
 
 class CourseEnrollment(Base):
+    """Modelo que representa la inscripción de un estudiante en un curso."""
+
     __tablename__ = "course_enrollments"
     __table_args__ = (
         CheckConstraint(
@@ -265,6 +283,8 @@ class CourseEnrollment(Base):
 
 
 class Unit(Base):
+    """Modelo que representa una unidad dentro de un curso."""
+
     __tablename__ = "units"
     __table_args__ = (
         CheckConstraint("end_date >= start_date", name="check_unit_dates"),
@@ -295,6 +315,8 @@ class Unit(Base):
 
 
 class Topic(Base):
+    """Modelo que representa un tema dentro de una unidad."""
+
     __tablename__ = "topics"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
@@ -316,6 +338,8 @@ class Topic(Base):
 
 
 class Platform(Base):
+    """Modelo que representa una plataforma externa utilizada en el sistema."""
+
     __tablename__ = "platforms"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
@@ -340,6 +364,8 @@ class Platform(Base):
 
 
 class EvaluationComponent(Base):
+    """Modelo que representa un componente de evaluación en el sistema."""
+
     __tablename__ = "evaluation_components"
     __table_args__ = (
         CheckConstraint("weight BETWEEN 0 AND 100", name="check_component_weight"),
@@ -369,6 +395,8 @@ class EvaluationComponent(Base):
 
 
 class Task(Base):
+    """Modelo que representa una tarea asignada a los estudiantes."""
+
     __tablename__ = "tasks"
     __table_args__ = (
         CheckConstraint("max_score > 0", name="check_task_score"),
@@ -411,6 +439,8 @@ class Task(Base):
 
 
 class TaskSubmission(Base):
+    """Modelo que representa la entrega de una tarea por parte de un estudiante."""
+
     __tablename__ = "task_submissions"
     __table_args__ = (
         CheckConstraint(
@@ -446,6 +476,8 @@ class TaskSubmission(Base):
 
 
 class Grade(Base):
+    """Modelo que representa la calificación de una tarea."""
+
     __tablename__ = "grades"
     __table_args__ = (
         CheckConstraint("grade BETWEEN 0 AND 100", name="check_grade_value"),
@@ -473,6 +505,8 @@ class Grade(Base):
 
 
 class Attendance(Base):
+    """Modelo que representa el registro de asistencia de un estudiante en un curso."""
+
     __tablename__ = "attendance"
     __table_args__ = (
         CheckConstraint(
