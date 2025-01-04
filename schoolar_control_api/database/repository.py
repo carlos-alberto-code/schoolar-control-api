@@ -1,6 +1,6 @@
 from typing import Type, TypeVar, List, Optional, Generic, Any
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class Repository(Generic[T]):
