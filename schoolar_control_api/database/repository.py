@@ -78,6 +78,7 @@ class Repository(Generic[T]):
         """
         try:
             self._session.add(entity)
+            self._session.commit()
             self._session.flush()
             self._session.refresh(entity)
             return entity
@@ -113,6 +114,7 @@ class Repository(Generic[T]):
                 .returning(self._model)
             )
             result = self._session.execute(stmt)
+            self._session.commit()
             return result.scalar_one_or_none()
         except SQLAlchemyError as e:
             raise RepositoryError(f"Error updating {self._model.__name__}") from e
@@ -135,6 +137,7 @@ class Repository(Generic[T]):
         try:
             stmt = delete(self._model).where(and_(*conditions))
             result = self._session.execute(stmt)
+            self._session.commit()
             return result.rowcount > 0
         except SQLAlchemyError as e:
             raise RepositoryError(f"Error deleting {self._model.__name__}") from e
